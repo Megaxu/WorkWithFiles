@@ -2,13 +2,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class Main {
 
   public static void main(String[] args) {
+
     firstStep();     // Обычное чтение файлов
     secondStep();    // Через inputStream
     thirdStep();     // Через bufferedReader
+    fourthStep();    // Через Files
+
   }
 
   private static void firstStep() {
@@ -66,6 +72,20 @@ public class Main {
         }
         builder.append(line + "\n");
       }
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
+
+    System.out.println(builder.toString());
+  }
+
+  private static void fourthStep() {
+
+    StringBuilder builder = new StringBuilder();
+
+    try {
+      List<String> lines = Files.readAllLines(Paths.get("data/info.txt"));
+      lines.forEach(line -> builder.append(line + "\n"));
     } catch (Exception ex) {
       ex.printStackTrace();
     }
